@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="{% static "/styles.css" %}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Eigen Coding Task | Che Mun Tang</title>
+</head>
+<body>
+    <div class="enumerator">
+        <header class="header-large">
+            <div class="container-large">
+                <div class="text-wrapper with-line">
+                    <h1>EIGEN CODING TASK</h1>
+                    <div class="before-line"></div>
+                    <p>
+                        Please see below for table containing a list of words used in the provided
+                        documents, along the documents they are featured in, and three sentences
+                        using the word.
+                    </p>
+                </div>
+            </div>
+        </header>
+        <section class="section-primary">
+            <div class="container-large">
+            <hr>
+                <div class="table__Enumerator">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Word</th>
+                                <th>Document(s)</th>
+                                <th>Sentence</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in word_sentence_dict %}
+                                <tr>
+                                    <td>{{ item.word }} ({{ item.occurences }})</td>
+                                    <td>
+                                        {% for doc in item.documents %}
+                                            {{ doc }}
+                                            <br>
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        {% for sentence in item.sentences|slice:":3" %}
+                                            - {{ sentence }}
+                                            <br>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
